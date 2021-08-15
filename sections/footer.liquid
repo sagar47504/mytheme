@@ -1,0 +1,24 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<div class="footer">
+    {% if section.settings.title != blank %}
+    <p>{{ section.settings.title }}</p>
+    {%- else -%}
+    <p>else Footer copy right and text</p>
+    {%- endif -%}
+  </div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Footer text"
+  }
+  ],
+  "default": {
+  }
+}
+{% endschema %}

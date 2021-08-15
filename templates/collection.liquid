@@ -1,0 +1,46 @@
+
+{% paginate collection.products by 2 %}
+  <h1>{{ collection.title }}</h1>
+  <div class="row">
+  {% for product in collection.products %}
+    <!-- <div>
+      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      {{ product.price | money }}
+      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+      <a href="{{ product.url | within: collection }}">
+        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      </a>
+    </div> -->
+    <div class="column">
+    <div class="product-card">
+      <div class="product-tumb">
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+      </div>
+      <div class="product-details">
+        <h4><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+        <p>{% unless product.available %}<br><strong>sold out</strong>{% endunless %}</p>
+        <div class="product-bottom-details">
+          <div class="product-price">{{ product.price | money }}</div>
+          <div class="product-links">
+            <a href=""><i class="fa fa-heart"></i></a>
+            <a href=""><i class="fa fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+    <p>no matches</p>
+  {% endfor %}
+</div>
+  {% if paginate.pages > 1 %}
+    {{ paginate | default_pagination }}
+  {% endif %}
+{% endpaginate %}
+<br>
+{% section 'product-recommendations' %}
+
+
